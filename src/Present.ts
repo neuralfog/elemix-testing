@@ -7,20 +7,15 @@ export class Present {
 
     public screen(template: Template): this {
         render(template, document.body);
-
-        this.rootElement = document.body.firstElementChild as Element;
-
-        if (!this.rootElement) {
-            throw new Error(
-                'Can not find first element within a Presenter Screen',
-            );
-        }
-
         return this;
     }
 
+    public body(): HTMLElement {
+        return document.body;
+    }
+
     public root<Component extends HTMLElement>(): Component {
-        return this.rootElement as Component;
+        return document.body.firstElementChild as Component;
     }
 
     public getByTag<Component extends HTMLElement>(tag: string): Component {
