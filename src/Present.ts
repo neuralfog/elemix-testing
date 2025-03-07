@@ -3,8 +3,6 @@ import type { Template } from './types';
 import { query } from './shadowRoot';
 
 export class Present {
-    private rootElement!: Element;
-
     public screen(template: Template): this {
         render(template, document.body);
         return this;
@@ -18,11 +16,11 @@ export class Present {
         return document.body.firstElementChild as Component;
     }
 
-    public getByTag<Component extends HTMLElement>(tag: string): Component {
+    public getComponent<Component extends HTMLElement>(tag: string): Component {
         return query(this.get(), tag) as Component;
     }
 
-    private get<Component extends HTMLElement>(): Component {
-        return this.rootElement as Component;
+    private get(): HTMLElement {
+        return document.body;
     }
 }
