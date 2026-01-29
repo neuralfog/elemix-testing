@@ -1,10 +1,10 @@
-export const queryAll = (
+export const queryAll = <T extends HTMLElement = HTMLElement>(
     root: HTMLElement | ShadowRoot,
     selector: string,
-): HTMLElement[] => {
-    const results: HTMLElement[] = Array.from(root.querySelectorAll(selector));
+): T[] => {
+    const results = Array.from(root.querySelectorAll(selector));
 
-    const pushNestedResults = (root: HTMLElement | ShadowRoot): void => {
+    const pushNestedResults = (root: any): void => {
         for (const elem of queryAll(root, selector)) {
             if (!results.includes(elem)) {
                 results.push(elem);
@@ -22,12 +22,28 @@ export const queryAll = (
         }
     }
 
-    return results;
+    return results as T[];
 };
 
-export const query = (
+export const query = <T extends HTMLElement = HTMLElement>(
     root: HTMLElement | ShadowRoot,
     selector: string,
-): HTMLElement => {
-    return queryAll(root, selector)[0];
+): T | undefined => {
+    return queryAll<T>(root, selector)[0];
+};
+
+export const waitFor = async <T extends HTMLElement = HTMLElement>(
+    root: HTMLElement | ShadowRoot,
+    selector: string,
+    timeoutMs = 2000,
+): Promise<T> => {
+    const start = performance.now();
+
+    while (performance.now() - start < timeoutMs) {
+        const el = query<T>(root, selector);
+        if (el) return el;
+        await new Promise((r) => setTimeout(r, 25));
+    }
+
+    throw new Error(`Timeout waiting for ${selector}`);
 };
