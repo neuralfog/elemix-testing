@@ -1,1 +1,1 @@
-export * from './src/Present';
+export * from './src/present';

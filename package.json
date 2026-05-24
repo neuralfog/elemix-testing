@@ -1,11 +1,13 @@
 {
     "name": "@neuralfog/elemix-testing",
-    "version": "0.1.4",
+    "version": "0.2.0",
     "license": "MIT",
     "author": "brownhounds",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "files": ["./dist/**/*"],
+    "files": [
+        "./dist/**/*"
+    ],
     "exports": {
         ".": "./dist/index.js",
         "./snapshots": "./dist/snapshots.js",
@@ -22,13 +24,13 @@
     },
     "devDependencies": {
         "@neuralfog/biome-config": "0.1.2",
-        "@neuralfog/elemix-renderer": "0.1.45",
-        "@neuralfog/ts-config": "0.1.1",
-        "rehype-format": "4.0.1",
-        "rehype-parse": "8.0.4",
-        "rehype-stringify": "9.0.3",
-        "typescript": "5.8.2",
-        "unified": "10.1.2",
-        "vite": "6.2.0"
+        "@neuralfog/elemix-renderer": "0.3.0",
+        "@neuralfog/ts-config": "0.1.2",
+        "rehype-format": "5.0.1",
+        "rehype-parse": "9.0.1",
+        "rehype-stringify": "10.0.1",
+        "typescript": "6.0.3",
+        "unified": "11.0.5",
+        "vite": "8.0.14"
     }
 }
